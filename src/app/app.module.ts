@@ -1,10 +1,12 @@
 import './core/rxjs-extensions';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
+
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from './company/company.service';
@@ -22,8 +24,10 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule.forRoot(),
+    // NgbModule.forRoot(),
     HttpClientModule,
+    // FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CompanyService],
   bootstrap: [AppComponent]

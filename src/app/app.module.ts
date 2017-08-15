@@ -14,6 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CompanyTableComponent } from './company/company-table/company-table.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 
+import { StoreModule } from '@ngrx/store';
+import { companyReducer } from "./reducers/company.reducer";
+import {  StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { CompanyEffects } from "./effects/company.effects";
+import { EffectsModule } from "@ngrx/effects";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +33,12 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
     // NgbModule.forRoot(),
     HttpClientModule,
     // FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      companies: companyReducer
+    }),
+    StoreDevtoolsModule.instrument({maxAge: 25}),
+    EffectsModule.forRoot([CompanyEffects])
   ],
   providers: [CompanyService],
   bootstrap: [AppComponent]

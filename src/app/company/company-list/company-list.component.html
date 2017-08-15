@@ -1,6 +1,12 @@
 <h1>
     Companies
-    <button class="btn btn-success float-right" [routerLink]="['/company/edit/new']"  >Add</button>
+    <button class="btn btn-success float-right" [routerLink]="['/company/edit/new']">Add</button>
 </h1>
-<fbc-company-table [companies]="companies$ | async" (onDeleteCompany)="deleteCompany($event)"  ></fbc-company-table>
-
+<div class="row">
+    <div class="col-md-6">
+        <fbc-company-table [companies]="companies$ | async" (onDeleteCompany)="deleteCompany($event)"></fbc-company-table>
+    </div>
+    <div class="col-md-6">
+        <fbc-company-table [companies]="companies$ | async" (onDeleteCompany)="deleteCompany($event)"></fbc-company-table>
+    </div>
+</div>

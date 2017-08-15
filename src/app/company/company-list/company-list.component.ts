@@ -3,18 +3,23 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { Subscription } from "rxjs/Subscription";
 import { Observable } from "rxjs/Observable";
+import { AppState } from "../../models/appState";
+import { Store } from '@ngrx/store';
+import * as companyActions from './../../actions/company.actions';
+
 
 @Component({
   selector: 'fbc-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.scss']
 })
-export class CompanyListComponent implements OnInit, OnDestroy {
+export class CompanyListComponent implements OnInit {
   companies$: Observable<Company[]>;
   mysucbscription: Subscription;
   companies: Company[];
 
-  constructor(private companyService: CompanyService) {
+  constructor(private store: Store<AppState>) {
+    this.companies$ = this.store.select(s => s.companies);
   }
 
   ngOnInit() {
@@ -22,17 +27,11 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   getCompanies() {
-    this.companies$ = this.companyService.getCompanies();
-    // this.mysucbscription = this.companyService.getCompanies()
-    //   .subscribe(next => this.companies = next);
+    this.store.dispatch(new companyActions.LoadCompanies())
   }
 
   deleteCompany(companyId: number) {
-    this.companyService.deleteCompany(companyId)
-      .subscribe(() => this.getCompanies());
-  }
-
-  ngOnDestroy() {
+    this.store.dispatch(new companyActions.DeleteCompany(companyId));
   }
 
 }

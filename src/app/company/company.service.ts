@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Store } from "@ngrx/store";
 import { AppState } from "../models/appState";
-import { LOAD_COMPANIES } from "../reducers/company.reducer";
 import * as companyActions from './../actions/company.actions';
 
 
